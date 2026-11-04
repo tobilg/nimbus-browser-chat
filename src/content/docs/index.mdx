@@ -1,0 +1,34 @@
+---
+title: Nimbus local chat
+description: Your documentation, with a browser-powered assistant.
+---
+
+This is a local Nimbus documentation site with a built-in [chat page](/chat). Ask questions about these docs using Qwen3.5 running in your browser.
+
+## Get started
+
+Install Node.js 22.12 or later, then run:
+
+```sh
+npm install
+npm run dev
+```
+
+Open `http://localhost:4321/chat`. Select a model, enter a question, and confirm its download. The model is cached for later use.
+
+## Write your documentation
+
+Add Markdown or MDX files to `src/content/docs/`. Nimbus adds the pages to navigation and exposes them through its MCP endpoint. The chat can discover and read those pages without a separate indexing service.
+
+Each page needs a `title` in its frontmatter. Add a short `description` to help the model find the right page.
+
+## How chat works
+
+The [browser chat guide](/browser-chat) explains models, caching, thinking mode, and privacy. Nimbus serves read-only documentation tools at `/mcp`; wllama runs the model locally and calls those tools as needed.
+
+## References
+
+- [Nimbus documentation](https://nimbus-docs.com)
+- [Nimbus source](https://github.com/cloudflare/nimbus), pinned at `references/nimbus`
+- [wllama source](https://github.com/ngxson/wllama), pinned at `references/wllama`
+- [assistant-ui](https://github.com/assistant-ui/assistant-ui), used for the chat interface

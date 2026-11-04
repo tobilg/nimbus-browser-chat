@@ -1,0 +1,6 @@
+[submodule "references/nimbus"]
+	path = references/nimbus
+	url = https://github.com/cloudflare/nimbus
+[submodule "references/wllama"]
+	path = references/wllama
+	url = https://github.com/ngxson/wllama

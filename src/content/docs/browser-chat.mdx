@@ -1,0 +1,40 @@
+---
+title: Browser chat
+description: Ask the documentation questions using a local Qwen model.
+sidebar:
+  order: 2
+---
+
+Open [Chat](/chat) to ask this site's documentation a question. The interface uses assistant-ui inside an Astro React island. Model inference runs in a browser worker through wllama.
+
+## Choose a model
+
+The model selector offers Qwen3.5 0.8B (533 MB) and Qwen3.5 2B (1.28 GB), both text-only Q4_K_M GGUF quantizations published by Unsloth. The smaller model is the default. The 2B model needs more memory and typically takes longer to answer.
+
+The Thinking switch controls the model's `enable_thinking` chat-template argument. Thinking is off by default. When enabled, reasoning appears separately from the answer.
+
+## Download and cache
+
+Submit a first message, then confirm the download dialog. Selecting a model alone does not download it. Cancelling the dialog leaves the model undownloaded.
+
+The model is cached in this browser. Future prompts reuse complete cached weights without downloading them again. Switching models only downloads a missing model after another confirmation. Browsers can evict cached data when storage is low; in that case, chat asks permission again.
+
+Use **Remove cached model** below the composer to free its storage. Conversation messages stay in memory and are cleared when the page reloads.
+
+## Documentation and privacy
+
+The browser connects to this site's `/mcp` endpoint using the MCP SDK's Streamable HTTP transport. Nimbus provides `list_pages` to discover documents and `get_page` to read their Markdown. The client exposes only these two read-only tools to the model. Lookup activity appears in the conversation.
+
+Model inference stays on your device. Model files are downloaded from Hugging Face, and documentation lookup arguments are sent to this site's server. No hosted model provider or inference API key is used.
+
+## Browser requirements
+
+Use a recent desktop browser with WebAssembly, browser storage, and enough free memory. Chrome or Edge is a good starting point. WebGPU is used when available; CPU inference is slower. A compatibility runtime is included for browsers without the newer WebAssembly features.
+
+The site must run on localhost or HTTPS. Cross-origin isolation headers enable multiple CPU threads. Only one model is held in memory at a time.
+
+## Troubleshooting
+
+If storage is full, remove a cached model or choose 0.8B. Private browser windows can have smaller storage quotas; use a regular window for 2B. A download that stops making progress for one minute times out and can be retried. If loading fails, close other memory-heavy tabs and try again. The **Stop response** button cancels downloads and generation; model initialization finishes its current operation before releasing memory.
+
+Prompts are limited to 4,000 characters. The runtime limits history, documentation excerpts, generated tokens, and tool calls to fit the browser context. Ask focused questions and start a new chat for a different topic. Always check the cited documentation: small models can make mistakes.
