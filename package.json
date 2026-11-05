@@ -4,7 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "predev": "npm run recipe:build",
     "dev": "astro dev",
+    "prebuild": "npm run recipe:build",
     "build": "astro build",
     "preview": "astro preview",
     "typecheck": "astro check",
@@ -14,6 +16,9 @@
     "test": "vitest run",
     "test:e2e": "playwright test",
     "check": "nimbus-docs check",
+    "recipe:build": "node scripts/build-chat-recipe.mjs",
+    "recipe:check": "node scripts/build-chat-recipe.mjs --check",
+    "recipe:print": "node scripts/build-chat-recipe.mjs --print",
     "postinstall": "node scripts/copy-wasm.mjs"
   },
   "dependencies": {

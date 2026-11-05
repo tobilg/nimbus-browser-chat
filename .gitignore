@@ -46,6 +46,9 @@ playwright/.cache/
 # Generated browser inference assets
 public/wasm/
 
+# Generated external feature recipe
+/public/registry/
+
 # OS and editor files
 .DS_Store
 Thumbs.db

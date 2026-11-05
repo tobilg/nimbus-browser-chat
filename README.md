@@ -68,6 +68,12 @@ git submodule update --init
 
 The main branch of a reference can be ahead of the published package. The app currently pins Nimbus 0.19.2 and wllama 3.8.1; consult installed types as well as the references. `AGENTS.md` records these conventions, and `AGENT.md` contains Nimbus's starter guidance.
 
+## Share the chat feature
+
+Run `npm run recipe:build` to generate a self-contained Nimbus feature recipe at `public/registry/features/browser-chat.md`. It embeds the working chat code, exact dependency versions, setup guidance, and tests. Give that file or its hosted `/registry/features/browser-chat.md` URL to a coding agent working in another Nimbus site. Dev starts and production builds regenerate the recipe automatically.
+
+Nimbus 0.19.2 does not accept arbitrary external feature URLs or discover new slugs through `NIMBUS_REGISTRY_URL`. The generated recipe uses Nimbus's format, but installation currently uses a direct agent handoff. See [external recipe instructions](registry/README.md) for distribution and the path to official registry inclusion.
+
 ## Checks
 
 ```sh
@@ -76,6 +82,7 @@ npm test
 npm run build
 npm run check
 npm run test:e2e
+npm run recipe:check
 ```
 
 If Playwright's Chromium is missing, install it with `npx playwright install chromium`. The normal suite tests consent, error recovery, mobile layout, isolation headers, and the real Nimbus MCP endpoint without downloading weights. Unit tests cover streaming, fragmented tool calls, limits, cache reuse, and cancellation.
